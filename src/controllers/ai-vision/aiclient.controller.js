@@ -1,3 +1,5 @@
+import AIApiClient from "../aiVisionClient"
+
 class AIVisionAnalysis {
 
     constructor(image) {
