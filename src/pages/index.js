@@ -5,11 +5,10 @@ import { takePicture } from "../api/blaserClient"
 export default function Camera() {
 
     const [pictureTaken, setPictureTaken] = useState(true)
-    
 
     const onPressButton = () => {
-        console.log("Button pressed")
-        setPictureTaken(!pictureTaken)
+        setPictureTaken(prev => !prev);
+
         takePicture()
             .then((response) => {
                 console.log("Image taken successfully:", response);
@@ -18,9 +17,10 @@ export default function Camera() {
                 console.error("Error taking picture:", error);
             })
             .finally(() => {
-                setPictureTaken(!pictureTaken)
-            })
-    }
+                setPictureTaken(prev => !prev); // Set back to "ready"
+            });
+    };
+
 
     return (
         <div className="w-screen h-screen flex justify-center items-center bg-slate-100">
