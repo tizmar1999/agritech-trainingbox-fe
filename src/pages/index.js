@@ -1,23 +1,32 @@
 import React from "react"
-import { useStreamingCamera } from "../controllers/camera/camera.controller"
+import { useState } from "react"
+import { takePicture } from "../api/blaserClient"
 
 export default function Camera() {
 
-    const {streamedImage} = useStreamingCamera()
+    const [pictureTaken, setPictureTaken] = useState(true)
+    
+
+    const onPressButton = () => {
+        console.log("Button pressed")
+        setPictureTaken(!pictureTaken)
+        takePicture()
+            .then((response) => {
+                console.log("Image taken successfully:", response);
+            })
+            .catch((error) => {
+                console.error("Error taking picture:", error);
+            })
+            .finally(() => {
+                setPictureTaken(!pictureTaken)
+            })
+    }
 
     return (
         <div className="w-screen h-screen flex justify-center items-center bg-slate-100">
-            <div className="w-[1000px] h-[700px] bg-black ">
-                <div className="w-full h-full object-fill border-8 border-green-500">
-                    {
-                        streamedImage &&
-                        <img src={streamedImage} className="w-full h-full object-fill" alt="streamed-image"/>
-                    }
-                </div>
-                <div className="text-green-500 font-bold text-xl animate-pulse">
-                    Streaming attivo
-                </div>
-            </div>
+            <button onClick={onPressButton} className="w-[600px] h-[300px] rounded-2xl bg-slate-800 text-white font-bold">
+                {pictureTaken ? "Scatta foto" : "Attendi..."}
+            </button>
         </div>
     )
 }

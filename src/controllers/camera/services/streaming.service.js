@@ -1,4 +1,4 @@
-import { getMockStreamingImage } from "../../cameraClient";
+import { getMockStreamingImage } from "../../../api/aiVisionClient"
 
 export const streamImage = (setStreamedImage) => {
     const stream = () => {
