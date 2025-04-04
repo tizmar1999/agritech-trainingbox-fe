@@ -1,37 +1,44 @@
 import axios from 'axios';
-import { image } from "../constants/image"
+import { image } from "../constants/image";
 
-// Create an Axios instance
-const apiClient = axios.create({
-    baseURL: 'http://localhost', // Change to your API base URL
-    timeout: 5003,
-    headers: {
-        'Content-Type': 'application/json',
-    },
-});
+class ApiClient {
+    static instance;
 
-// Example GET request
-export const getData = async (endpoint) => {
-    try {
-        const response = await apiClient.get(endpoint);
-        return response.data;
-    } catch (error) {
-        console.error('GET error:', error.message);
-        throw error;
+    constructor() {
+        if (!ApiClient.instance) {
+            ApiClient.instance = this;
+            this.axiosInstance = axios.create({
+                baseURL: 'http://localhost', // Change to your API base URL
+                timeout: 5003,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+        }
+        return ApiClient.instance;
     }
-};
 
-// Example POST request
-export const postData = async (endpoint, data) => {
-    try {
-        const response = await apiClient.post(endpoint, data);
-        return response.data;
-    } catch (error) {
-        console.error('POST error:', error.message);
-        throw error;
+    async getData(endpoint) {
+        try {
+            const response = await this.axiosInstance.get(endpoint);
+            return response.data;
+        } catch (error) {
+            console.error('GET error:', error.message);
+            throw error;
+        }
     }
-};
 
-export const getMockStreamingImage = () => {
-    return image
+    async postData(endpoint, data) {
+        try {
+            const response = await this.axiosInstance.post(endpoint, data);
+            return response.data;
+        } catch (error) {
+            console.error('POST error:', error.message);
+            throw error;
+        }
+    }
 }
+
+// Export a single instance
+const AIApiClient = new ApiClient();
+export default AIApiClient;
