@@ -1,21 +1,21 @@
 import axios from 'axios';
-import { image } from "../constants/image";
+import { ENV } from '../constants/config';
 
-class ApiClient {
+class RTLApiClient {
     static instance;
 
     constructor() {
-        if (!ApiClient.instance) {
-            ApiClient.instance = this;
+        if (!RTLApiClient.instance) {
+            RTLApiClient.instance = this;
             this.axiosInstance = axios.create({
-                baseURL: 'http://localhost', // Change to your API base URL
-                timeout: 8080,
+                baseURL: ENV.rtlNodeBackedPort,
+                timeout: 20000,
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
         }
-        return ApiClient.instance;
+        return RTLApiClient.instance;
     }
 
     async getData(endpoint) {
@@ -39,6 +39,6 @@ class ApiClient {
     }
 }
 
-// Export a single instance
-const AIApiClient = new ApiClient();
-export default AIApiClient;
+// Export a single instance of the RTLApiClient class
+const rtlApiClientInstance = new RTLApiClient();
+export default rtlApiClientInstance;
