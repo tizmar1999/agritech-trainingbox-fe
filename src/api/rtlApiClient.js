@@ -9,7 +9,7 @@ class ApiClient {
             ApiClient.instance = this;
             this.axiosInstance = axios.create({
                 baseURL: 'http://localhost', // Change to your API base URL
-                timeout: 5003,
+                timeout: 8080,
                 headers: {
                     'Content-Type': 'application/json',
                 },
