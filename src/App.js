@@ -4,13 +4,13 @@ import {
   Route, 
   Routes} 
 from "react-router-dom"
-import Camera from './pages/index'
+import Home from './pages/index'
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<Camera />} />
+        <Route exact path="/" element={<Home />} />
       </Routes>
     </Router>
   );
