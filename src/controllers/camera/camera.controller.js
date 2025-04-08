@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getAiFruitDetection } from "./services/streaming.service";
 
 export const useStreamingCamera = () => {
-    const [streamedImage, setStreamedImage] = useState(null);
+    const [annotatedImage, setAnnotatedImage] = useState(null);
     const [colorCount, setColorCount] = useState(null);
     const [qualityCount, setQualityCount] = useState(null);
     const [sizeCount, setSizeCount] = useState(null);
@@ -12,11 +12,11 @@ export const useStreamingCamera = () => {
         const performAiFruitDetection = async () => {
             try {
                 const aiFruitDetection = await getAiFruitDetection();
-                setStreamedImage(aiFruitDetection.annotated_img_str);
+                setAnnotatedImage('data:image/png;base64,'+aiFruitDetection.annotated_img_str);
                 setColorCount(aiFruitDetection.color_counts);
                 setQualityCount(aiFruitDetection.quality_counts);
                 setSizeCount(aiFruitDetection.size_counts);
-                setTotalCount(aiFruitDetection.total_count);
+                setTotalCount(aiFruitDetection.total_objects);
             } catch (err) {
                 console.error("Error fetching AI fruit detection:", err);
             }
@@ -26,7 +26,7 @@ export const useStreamingCamera = () => {
     }, []);
 
     return {
-        streamedImage,
+        annotatedImage,
         colorCount,
         qualityCount,
         sizeCount,
