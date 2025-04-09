@@ -5,7 +5,7 @@ services:
       - '3001:3000'
     environment:
       NODE_ENV: development
-      API_URL: rtl-nodejs-be.rtl-nodejs-be.orb.local:8080
+      API_URL: http://localhost:8080/api/v1/rtl-services
       CHOKIDAR_USEPOLLING: true
     volumes:
       - .:/app

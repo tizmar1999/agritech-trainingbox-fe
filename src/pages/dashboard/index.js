@@ -4,60 +4,18 @@ import CountSummaryCard from '../../components/Cards/CountSummaryCard';
 import DataVisualization from '../../components/Cards/DataVisualization';
 import ImageTable from '../../components/ImageTable';
 import { Database } from 'lucide-react';
+import rtlApiClientInstance from '../../api/rtlApiClient';
 
-// Sample data based on your schema
-const mockData = [
-    {
-        id: 1,
-        imageId: "img_001",
-        original_img_str: "fruit_basket_01.jpg",
-        annotated_img_str: "fruit_basket_01_annotated.jpg",
-        total_objects: 12,
-        freq: "medium",
-        most_freq: "apple",
-        pie_chart_div: "<div>chart</div>",
-        detection_summary: "4 apples, 3 oranges, 5 bananas",
-        size_counts: { small: 3, medium: 7, large: 2 },
-        color_counts: { red: 5, yellow: 5, orange: 2 },
-        quality_counts: { good: 9, average: 2, poor: 1 }
-    },
-    {
-        id: 2,
-        imageId: "img_002",
-        original_img_str: "fruit_bowl_02.jpg",
-        annotated_img_str: "fruit_bowl_02_annotated.jpg",
-        total_objects: 8,
-        freq: "high",
-        most_freq: "grape",
-        pie_chart_div: "<div>chart</div>",
-        detection_summary: "2 apples, 6 grape clusters",
-        size_counts: { small: 6, medium: 2, large: 0 },
-        color_counts: { red: 2, green: 6, purple: 0 },
-        quality_counts: { good: 7, average: 1, poor: 0 }
-    },
-    {
-        id: 3,
-        imageId: "img_003",
-        original_img_str: "fruit_plate_03.jpg",
-        annotated_img_str: "fruit_plate_03_annotated.jpg",
-        total_objects: 15,
-        freq: "low",
-        most_freq: "strawberry",
-        pie_chart_div: "<div>chart</div>",
-        detection_summary: "8 strawberries, 4 blueberries, 3 raspberries",
-        size_counts: { small: 15, medium: 0, large: 0 },
-        color_counts: { red: 11, blue: 4, purple: 0 },
-        quality_counts: { good: 12, average: 2, poor: 1 }
-    }
-];
-
-// Main Dashboard Component
 export default function Dashboard() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        // In a real app, you'd fetch from your database
-        setData(mockData);
+        const getAllAnnotatedImages = async () => {
+            const allAnnotatedImages = await rtlApiClientInstance.getData('get_all_annotated_images')
+            console.log(allAnnotatedImages)
+            setData(allAnnotatedImages)
+        }
+        getAllAnnotatedImages()
     }, []);
 
     return (
@@ -87,12 +45,12 @@ export default function Dashboard() {
                     iconColor="text-purple-500"
                 />
             </div>
-            <div className="mt-8">
+            {/* <div className="mt-8">
                 <DataVisualization data={data} />
             </div>
             <div className="mt-8">
                 <ImageTable data={data} />
-            </div>
+            </div> */}
         </div>
     );
 }
