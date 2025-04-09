@@ -5,12 +5,14 @@ import {
   Routes} 
 from "react-router-dom"
 import Home from './pages/index'
+import Dashboard from './pages/dashboard/index';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route exact path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );
