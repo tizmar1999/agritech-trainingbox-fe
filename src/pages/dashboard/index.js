@@ -24,21 +24,21 @@ export default function Dashboard() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6">
                 <TotalObjectsCard data={data} />
                 <CountSummaryCard
-                    title="Size Distribution"
+                    title="Dimensioni"
                     data={data}
                     countType="size_counts"
                     colorClass="bg-blue-100"
                     iconColor="text-blue-500"
                 />
                 <CountSummaryCard
-                    title="Color Distribution"
+                    title="Colori"
                     data={data}
                     countType="color_counts"
                     colorClass="bg-green-100"
                     iconColor="text-green-500"
                 />
                 <CountSummaryCard
-                    title="Quality Distribution"
+                    title="Qualità"
                     data={data}
                     countType="quality_counts"
                     colorClass="bg-purple-100"
@@ -47,10 +47,10 @@ export default function Dashboard() {
             </div>
             {/* <div className="mt-8">
                 <DataVisualization data={data} />
-            </div>
+            </div> */}
             <div className="mt-8">
                 <ImageTable data={data} />
-            </div> */}
+            </div>
         </div>
     );
 }
