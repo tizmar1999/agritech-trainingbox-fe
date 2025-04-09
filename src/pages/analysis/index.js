@@ -23,17 +23,17 @@ export default function Analysis() {
     }, [currentAnnotation]);
 
     return (
-        <div className="w-screen h-screen flex flex-row bg-slate-600">
+        <div className="w-screen h-screen flex flex-row bg-gray-50 p-4">
             <button onClick={()=>{
                 navigate('/dashboard')
             }}
-            className="text-3xl text-white font-bold"
+            className="text-3xl text-red-600 font-bold"
             >
                 Torna inidietro
             </button>
-            <div className="flex flex-row w-full h-full justify-start items-center">
+            <div className="flex flex-row w-full h-full justify-start items-center space-x-4">
                 <Camera
-                    streamedImage={'data:image/png;base64,'+currentAnnotation?.annotated_img_str || ""}
+                    streamedImage={currentAnnotation ? 'data:image/png;base64,' + currentAnnotation.annotated_img_str : ""}
                     className="w-full h-full bg-green-600"
                 />
                 {currentAnnotation && (
