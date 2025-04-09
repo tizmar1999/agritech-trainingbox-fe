@@ -1,3 +1,3 @@
 export const ENV = {
-    rtlNodeBackedPort: 'http://localhost:8080',
+    rtlNodeBackedPort: process.env.API_URL || 'http://localhost:8080'
 }

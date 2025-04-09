@@ -1,0 +1,10 @@
+services:
+  rtl-camera-fe:
+    build: .
+    ports:
+      - '3001:3000'
+    environment:
+      NODE_ENV: development
+      API_URL: rtl-nodejs-be.rtl-nodejs-be.orb.local:8080
+    volumes:
+      - .:/app
