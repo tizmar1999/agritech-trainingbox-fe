@@ -10,7 +10,7 @@ export default function DataVisualization({ data }) {
 
     return (
         <div className="bg-white rounded-xl shadow p-6">
-            <h2 className="text-lg font-medium text-gray-700 mb-4">Objects per Image</h2>
+            <h2 className="text-lg font-medium text-gray-700 mb-4">Oggetti per immagine</h2>
             <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={prepareChartData()}>

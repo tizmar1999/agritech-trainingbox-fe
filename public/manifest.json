@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Saclark - Rethinkline: AI Training Box",
+  "name": "This is the frontend for the AI Trainig Box",
   "icons": [
     {
       "src": "favicon.ico",

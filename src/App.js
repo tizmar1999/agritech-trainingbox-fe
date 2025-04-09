@@ -6,14 +6,19 @@ import {
 from "react-router-dom"
 import Home from './pages/index'
 import Dashboard from './pages/dashboard/index';
+import Analysis from './pages/analysis';
+import { AnnotatedImagesProvider } from './providers/AnnotatedImagesProvider';
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
+      <AnnotatedImagesProvider>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/analysis/:id" element={<Analysis />} />
+        </Routes>
+      </AnnotatedImagesProvider>
     </Router>
   );
 }
