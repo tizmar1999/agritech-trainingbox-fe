@@ -3,7 +3,6 @@ import TotalObjectsCard from '../../components/Cards/TotalObjectsCard';
 import CountSummaryCard from '../../components/Cards/CountSummaryCard';
 import DataVisualization from '../../components/Cards/DataVisualization';
 import ImageTable from '../../components/ImageTable';
-import { Database } from 'lucide-react';
 import rtlApiClientInstance from '../../api/rtlApiClient';
 import CustomLoadBar from '../../components/CustomLoadBar';
 import { useAnnotatedImages } from '../../providers/AnnotatedImagesProvider';
@@ -66,7 +65,6 @@ export default function Dashboard() {
 function Header() {
     return (
         <div className="flex items-center">
-            <Database size={24} className="text-blue-500 mr-2" />
             <h1 className="text-2xl font-bold text-gray-800">Saclark - RethinkLine: Training AI</h1>
         </div>
     );
