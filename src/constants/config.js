@@ -1,3 +1,3 @@
 export const ENV = {
-    rtlNodeBackedPort: process.env.API_URL || 'http://localhost:8080/api/v1/rtl-services'
+    rtlNodeBackedPort: process.env.API_URL || 'https://rethinkline-services.ngrok.app/api/v1/rtl-services'
 }
