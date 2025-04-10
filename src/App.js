@@ -7,10 +7,13 @@ from "react-router-dom"
 import Home from './pages/index'
 import Dashboard from './pages/dashboard/index';
 import Analysis from './pages/analysis';
+import Header from './components/Header';
 import { AnnotatedImagesProvider } from './providers/AnnotatedImagesProvider';
 
 function App() {
   return (
+    <>
+    <Header />
     <Router>
       <AnnotatedImagesProvider>
         <Routes>
@@ -20,6 +23,7 @@ function App() {
         </Routes>
       </AnnotatedImagesProvider>
     </Router>
+    </>
   );
 }
 

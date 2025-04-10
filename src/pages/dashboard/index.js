@@ -45,9 +45,9 @@ export default function Dashboard() {
                     iconColor="text-purple-500"
                 />
             </div>
-            <div className="mt-8">
+            {/* <div className="mt-8">
                 <DataVisualization data={state.data} />
-            </div>
+            </div> */}
             <div className="mt-8">
                 <ImageTable data={state.data} />
             </div>

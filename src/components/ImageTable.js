@@ -31,7 +31,7 @@ export default function ImageTable({ data }) {
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <div className="w-12 h-12 bg-gray-200 rounded flex items-center justify-center">
                                         <img
-                                            src={`data:image/png;base64,${item.original_img_str}`}
+                                            src={`data:image/png;base64,${item.annotated_img_str}`}
                                             alt="fruit"
                                             className="w-full h-full rounded object-cover"
                                         />
