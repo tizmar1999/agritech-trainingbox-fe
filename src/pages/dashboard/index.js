@@ -4,7 +4,6 @@ import CountSummaryCard from '../../components/Cards/CountSummaryCard';
 import DataVisualization from '../../components/Cards/DataVisualization';
 import ImageTable from '../../components/ImageTable';
 import rtlApiClientInstance from '../../api/rtlApiClient';
-import CustomLoadBar from '../../components/CustomLoadBar';
 import { useAnnotatedImages } from '../../providers/AnnotatedImagesProvider';
 
 export default function Dashboard() {
@@ -28,14 +27,14 @@ export default function Dashboard() {
                     title="Dimensioni"
                     data={state.data}
                     countType="size_counts"
-                    colorClass="bg-blue-100"
-                    iconColor="text-blue-500"
+                    colorClass="bg-rtlblue-100"
+                    iconColor="text-rtlblue-500"
                 />
                 <CountSummaryCard
                     title="Colori"
                     data={state.data}
                     countType="color_counts"
-                    colorClass="bg-green-100"
+                    colorClass="bg-rtlblue-100"
                     iconColor="text-green-500"
                 />
                 <CountSummaryCard
@@ -45,12 +44,6 @@ export default function Dashboard() {
                     colorClass="bg-purple-100"
                     iconColor="text-purple-500"
                 />
-            </div>
-            <div className="mt-8">
-                <div className='text-2xl font-bold'>
-                    Progresso del training:
-                </div>
-                <CustomLoadBar progress={state.data.reduce((sum, item) => sum + item.total_objects, 0)/800*100} />
             </div>
             <div className="mt-8">
                 <DataVisualization data={state.data} />

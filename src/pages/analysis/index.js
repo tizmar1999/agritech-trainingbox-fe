@@ -27,7 +27,7 @@ export default function Analysis() {
             <button onClick={()=>{
                 navigate('/dashboard')
             }}
-            className="text-3xl text-red-600 font-bold"
+            className="text-3xl text-rtlblue-dark font-bold"
             >
                 Torna inidietro
             </button>

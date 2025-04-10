@@ -30,7 +30,7 @@ export default function Dashboard({ total_count, color_counts, quality_counts, s
     if (!total_count) return null;
 
     return (
-        <div className="p-8 rounded-lg bg-slate-100 shadow-md w-[800px] h-5/6">
+        <div className="p-8 rounded-lg border border-rtlblue-200 w-[800px] h-5/6">
             <div className="flex flex-row space-x-4">
                 <div className="flex-1">
                     <p>Totale pere rilevate</p>

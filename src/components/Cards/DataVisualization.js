@@ -17,7 +17,7 @@ export default function DataVisualization({ data }) {
                         <XAxis dataKey="name" />
                         <YAxis />
                         <Tooltip />
-                        <Bar dataKey="total" fill="#4f46e5" />
+                        <Bar dataKey="total" fill="#D3C7E4" />
                     </BarChart>
                 </ResponsiveContainer>
             </div>

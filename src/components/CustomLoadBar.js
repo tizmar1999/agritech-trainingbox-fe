@@ -1,15 +1,24 @@
 import { useEffect, useState } from "react";
 
-export default function CustomLoadBar({progress}) {
+export default function CustomLoadBar({progress = 50}) {
     return (
-        <div className="flex flex-row w-full max-w-xl mt-10 space-x-4 items-center">
-            <div className="w-full h-8 bg-gray-200 rounded-sm overflow-hidden shadow-inner">
+        <div className="flex flex-col w-full max-w-xl items-center">
+            <div className="w-full h-[24px] bg-gray-200 rounded-lg overflow-hidden shadow-inner">
                 <div
-                    className="h-full bg-blue-600 transition-all duration-75 ease-linear"
+                    className="flex flex-row items-center justify-end relative h-full bg-primary transition-all duration-75 ease-linear"
                     style={{ width: `${progress}%` }}
-                />
+                >
+                    {
+                        progress > 20 && (
+                            <p className="text-sm text-white font-quantico top-2 right-2 pl-2">{`${progress}%`}</p>
+                        )
+                    }
+                </div>
             </div>
-            <p className="text-3xl text-blue-600 font-bold text-right mt-1">{Number(progress).toFixed(0)}%</p>
+            <div className="w-full flex flex-row justify-between">
+                <p className="text-md text-rtlblue-dark font-quantico text-right mt-1">0</p>
+                <p className="text-md text-rtlblue-dark font-quantico text-right mt-1">2000</p>
+            </div>
         </div>
     );
 }

@@ -1,10 +1,14 @@
+import CustomLoadBar from "../CustomLoadBar";
+
 export default function TotalObjectsCard({ data }) {
     const totalObjects = data.reduce((sum, item) => sum + item.total_objects, 0);
     return (
-        <div className="bg-white rounded-xl shadow p-6 flex flex-col items-center justify-center">
-            <h2 className="text-lg font-medium text-gray-600">Frutti totali</h2>
-            <span className="text-4xl font-bold text-blue-600 mt-2">{totalObjects}</span>
-            <p className="text-sm text-gray-500 mt-2">Da {data.length} foto</p>
+        <div className="w-[380px] h-[200px] border border-gray-200 bg-white rounded-xl shadow p-6 flex flex-col items-center justify-center">
+            <div className="w-full h-full p-4 flex flex-col space-y-2">
+                <h2 className="text-2xl font-quantico font-bold text-primary">{`${totalObjects} Frutti totali`}</h2>
+                <h1 className="text-lg font-quantico">{`su ${data.length} foto`}</h1>
+                <CustomLoadBar progress={totalObjects / 2000 * 100} />
+            </div>
         </div>
     );
 }
