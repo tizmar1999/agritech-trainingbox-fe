@@ -16,7 +16,7 @@ export default function ImageTable({ data }) {
                     <thead className="bg-gray-50">
                         <tr>
                             <th className="px-6 py-3 text-left text-xs tracking-wider">Preview</th>
-                            <th className="px-6 py-3 text-left text-xs tracking-wider">Frutti totali</th>
+                            <th className="px-6 py-3 text-left text-xs tracking-wider">Numero scatto</th>
                             <th className="px-6 py-3 text-left text-xs tracking-wider">Totale</th>
                             <th className="px-6 py-3 text-left text-xs tracking-wider">Descrizione</th>
                         </tr>
@@ -44,7 +44,7 @@ export default function ImageTable({ data }) {
                                     {item.total_objects}
                                 </td>
                                 <td className="px-6 py-4 text-sm text-gray-500">
-                                    {item.detection_summary}
+                                    {item.detection_summary.replace("Analizza l'immagine fornita:", '')}
                                 </td>
                             </tr>
                         ))}

@@ -15,7 +15,17 @@ export default function Dashboard() {
             console.log(allAnnotatedImages);
             dispatch({ type: 'SET_ANNOTATED', payload: allAnnotatedImages });
         };
+    
+        // Call the function immediately
         getAllAnnotatedImages();
+    
+        // Set up an interval to call the function every 2 minutes
+        const intervalId = setInterval(() => {
+            getAllAnnotatedImages();
+        }, 60 * 1000); // 2 minutes in milliseconds
+    
+        // Cleanup the interval on component unmount
+        return () => clearInterval(intervalId);
     }, []);
 
     return (
