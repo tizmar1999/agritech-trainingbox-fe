@@ -1,4 +1,4 @@
-# Camera FE
+# Camera Training Box
 
 A React-based dashboard that displays AI fruit detection results (counts by quality, size, and dominant color) and lets you browse annotated images captured by the camera pipeline.
 
