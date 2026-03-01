@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from 'react';
+import { useEffect, useState } from 'react';
 import TotalObjectsCard from '../../components/Cards/TotalObjectsCard';
 import CountSummaryCard from '../../components/Cards/CountSummaryCard';
 import DataVisualization from '../../components/Cards/DataVisualization';
@@ -8,12 +8,21 @@ import { useAnnotatedImages } from '../../providers/AnnotatedImagesProvider';
 
 export default function Dashboard() {
     const { state, dispatch } = useAnnotatedImages();
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const getAllAnnotatedImages = async () => {
-            const allAnnotatedImages = await rtlApiClientInstance.getData('get_all_annotated_images');
-            console.log(allAnnotatedImages);
-            dispatch({ type: 'SET_ANNOTATED', payload: allAnnotatedImages });
+            try {
+                const allAnnotatedImages = await rtlApiClientInstance.getData('get_all_annotated_images');
+                dispatch({ type: 'SET_ANNOTATED', payload: allAnnotatedImages });
+                setError(null);
+            } catch (err) {
+                console.error('Error fetching annotated images', err);
+                setError('Impossibile recuperare i dati al momento.');
+            } finally {
+                setLoading(false);
+            }
         };
     
         // Call the function immediately
@@ -22,7 +31,7 @@ export default function Dashboard() {
         // Set up an interval to call the function every 2 minutes
         const intervalId = setInterval(() => {
             getAllAnnotatedImages();
-        }, 60 * 1000); // 2 minutes in milliseconds
+        }, 120 * 1000); // 2 minutes in milliseconds
     
         // Cleanup the interval on component unmount
         return () => clearInterval(intervalId);
@@ -30,7 +39,19 @@ export default function Dashboard() {
 
     return (
         <div className="flex flex-col w-full min-h-screen bg-gray-50 p-6">
-            <Header />
+            <div className="flex items-center">
+                <h1 className="text-2xl font-bold text-gray-800">Saclark - RethinkLine: Training AI</h1>
+            </div>
+
+            {loading && (
+                <div className="mt-6 text-gray-600">Caricamento dati in corso...</div>
+            )}
+
+            {error && (
+                <div className="mt-4 p-4 bg-red-50 text-red-700 rounded border border-red-200">
+                    {error}
+                </div>
+            )}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6">
                 <TotalObjectsCard data={state.data} />
                 <CountSummaryCard
@@ -61,14 +82,6 @@ export default function Dashboard() {
             <div className="mt-8">
                 <ImageTable data={state.data} />
             </div>
-        </div>
-    );
-}
-
-function Header() {
-    return (
-        <div className="flex items-center">
-            <h1 className="text-2xl font-bold text-gray-800">Saclark - RethinkLine: Training AI</h1>
         </div>
     );
 }

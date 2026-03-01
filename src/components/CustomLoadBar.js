@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
-
 export default function CustomLoadBar({progress = 50}) {
+    const normalizedProgress = Math.min(100, Math.max(0, progress ?? 0));
     return (
         <div className="flex flex-col w-full max-w-xl items-center">
             <div className="w-full h-[24px] bg-gray-200 rounded-lg overflow-hidden shadow-inner">
                 <div
                     className="flex flex-row items-center justify-end relative h-full bg-primary transition-all duration-75 ease-linear"
-                    style={{ width: `${progress}%` }}
+                    style={{ width: `${normalizedProgress}%` }}
                 >
                     {
-                        progress > 20 && (
-                            <p className="text-sm text-white font-quantico top-2 right-2 pl-2">{`${progress}%`}</p>
+                        normalizedProgress > 20 && (
+                            <p className="text-sm text-white font-quantico top-2 right-2 pl-2">{`${Math.round(normalizedProgress)}%`}</p>
                         )
                     }
                 </div>
