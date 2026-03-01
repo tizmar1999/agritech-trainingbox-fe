@@ -1,70 +1,84 @@
-# Getting Started with Create React App
+# Camera FE
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based dashboard that displays AI fruit detection results (counts by quality, size, and dominant color) and lets you browse annotated images captured by the camera pipeline.
+
+## Features
+- Live fetch of annotated images from the RTL services backend.
+- Summary cards for totals, sizes, colors, and quality classes.
+- Drill-down page to view a single annotated image with per-shot metrics.
+- Responsive Tailwind UI with empty, loading, and error states.
+- Basic testing scaffold with React Testing Library.
+
+## Tech Stack
+- React 18 (Create React App)
+- React Router
+- Tailwind CSS
+- Axios
+- React Testing Library / Jest
+
+## Prerequisites
+- Node.js 18+
+- npm 9+
+
+## Getting Started
+1) Install dependencies  
+```bash
+npm install
+```
+
+2) Configure environment  
+Set the backend base URL via `API_URL` (defaults to the provided ngrok endpoint):
+```bash
+export API_URL="https://your-backend.example.com/api/v1/rtl-services"
+```
+
+3) Run the app  
+```bash
+npm start
+```
+The app runs on http://localhost:3000.
 
 ## Available Scripts
+- `npm start` – start dev server with hot reload.
+- `npm test` – run unit tests (watch mode).
+- `npm run build` – production build in `build/`.
 
-In the project directory, you can run:
+## Project Structure
+```
+src/
+  api/rtlApiClient.js        # Axios instance to talk to RTL backend
+  components/                # Reusable UI (cards, dashboard, camera, table, etc.)
+  controllers/camera/        # Hooks and services for AI fruit detection
+  pages/                     # Route-level components (dashboard, analysis, redirect)
+  providers/                 # React context for annotated images
+  store/                     # Reducers and initial state
+  constants/                 # Config and assets references
+```
 
-### `npm start`
+## Configuration
+- `API_URL` (env): base URL for the backend (should point to the root of rtl-services).
+- Tailwind config lives in `tailwind.config.js`.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Testing
+```bash
+npm test
+```
+Current smoke test checks header rendering; add scenario tests for data loading, empty states, and error handling as you evolve the UI.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Deployment
+Build and serve the static bundle:
+```bash
+npm run build
+```
+Serve the `build/` folder with any static host (Nginx, S3/CloudFront, Vercel, Netlify, etc.).
 
-### `npm test`
+## Troubleshooting
+- **404 on AI endpoints**: ensure `API_URL` does not already include `/api/v1/rtl-services` twice and that your backend allows the origin.
+- **Blank dashboard**: check network tab for failing requests; the UI now surfaces an error banner for fetch issues.
+- **Tailwind class purging**: avoid dynamic class strings not listed in `tailwind.config.js`; palette for size colors is hard-coded to prevent purging.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Roadmap Ideas
+- Add retry/refresh controls and skeleton loaders.
+- Internationalization (EN/IT) and consistent copy.
+- Snapshot/RTL tests for cards and table states.
+- Deploy pipeline (CI) with lint, test, and build steps.
